@@ -1,0 +1,13 @@
+rules:
+  - id: insecure-strcpy-usage
+    languages:
+      - c
+      - cpp
+    message: Avoid using strcpy; it can cause buffer overflows. Consider using strncpy or safer alternatives.
+    severity: WARNING
+    pattern: strcpy($DEST, $SRC)
+    metadata:
+      category: security
+      technology:
+        - c
+        - cpp
