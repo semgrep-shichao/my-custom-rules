@@ -38,4 +38,6 @@ jobs:
           semgrep --error --config "p/semgrep-rule-ci"
 
       - name: Run semgrep publish
-        run: semgrep publish rules/
+        run: |
+          semgrep login
+          semgrep publish rules/
