@@ -39,5 +39,9 @@ jobs:
 
       - name: Run semgrep publish
         run: |
-          semgrep login
           semgrep publish rules/
+
+      - name: Add rules to policy
+        run: |
+          python3 scripts/put_rules_in_mode.py
+          
