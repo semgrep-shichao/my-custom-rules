@@ -13,6 +13,7 @@ rules:
         - vuln
       likelihood: MEDIUM
       impact: HIGH
+      confidence: HIGH
       technology:
         - c
         - cpp
