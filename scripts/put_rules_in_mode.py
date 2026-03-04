@@ -31,7 +31,7 @@ def get_semgrep_org_slug(headers):
     data = r.json()
     print(data)
     deployment_slug = data['deployments'][0].get('slug')
-    logging.info((f'Accessing org slug: {deployment_slug}')
+    logging.info(f"Accessing org slug: {deployment_slug}")
     return deployment_slug
 
 def get_deployment_id(headers):
