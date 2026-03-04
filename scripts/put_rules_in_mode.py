@@ -2,6 +2,24 @@ import os
 import yaml
 import requests
 import sys
+import logging
+import json
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(levelname)s:%(funcName)s: %(message)s"
+)
+
+def extract_ids_from_yaml(file_path):
+    """Extracts the 'id' field from a given YAML file."""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = yaml.safe_load(f)
+            if isinstance(data, dict) and 'rules' in data and isinstance(data['rules'], list):
+                return [rule['id'] for rule in data['rules'] if 'id' in rule]
+    except Exception as e:
+        logging.error(f"Error reading {file_path}: {e}")
+    return []
 
 MODE = 'MODE_MONITOR'
 BASE_URL = 'https://semgrep.dev/api/v1/deployments'
@@ -56,7 +74,7 @@ def extract_ids_from_yaml(file_path):
             if isinstance(data, dict) and 'rules' in data and isinstance(data['rules'], list):
                 return [rule['id'] for rule in data['rules'] if 'id' in rule]
     except Exception as e:
-        print(f"Error reading {file_path}: {e}")
+        logging.error(f"Error reading {file_path}: {e}")
     return []
 
 
@@ -76,9 +94,9 @@ def update_policy(deployment_id, policy_id, policy_mode, path, headers):
         dict: The JSON response from the API.
     """
     url = f"{BASE_URL}/{deployment_id}/policies/{policy_id}?rulePath={path}&policyMode={policy_mode}"
-    print(url)
+    logging.info(f"{url}")
     response = requests.put(url, headers=headers)
-    print(response.json())
+    logging.info("Response JSON:\n%s", json.dumps(response.json(), indent=2))
     return response.json()
 
 
