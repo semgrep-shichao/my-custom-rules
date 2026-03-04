@@ -118,6 +118,7 @@ def main(directory):
             print(f"File: {yaml_file}")
             for rule_id in ids:
                 print(f"  ID: {rule_id}")
+                rule_id = f"semgrep_sc_ci.{rule_id}"
                 update_policy(deployment_id, policy_id, MODE, rule_id, headers)
 
 if __name__ == "__main__":
