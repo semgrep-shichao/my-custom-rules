@@ -24,6 +24,13 @@ def extract_ids_from_yaml(file_path):
 MODE = 'MODE_MONITOR'
 BASE_URL = 'https://semgrep.dev/api/v1/deployments'
 
+def get_semgrep_org_slug(headers):
+    url = "https://semgrep.dev/api/organizations"
+    resp = requests.get(url, headers=headers)
+    resp.raise_for_status()
+
+    data = resp.json()
+    return data["orgs"][0]["slug"]  # first org slug
 
 def get_deployment_id(headers):
     """
@@ -110,6 +117,7 @@ def main(directory):
     headers = {"Accept": "application/json", "Authorization": "Bearer " + SEMGREP_APP_TOKEN}
 
     deployment_id = get_deployment_id(headers)
+    deployment_slug = get_semgrep_org_slug(headers)
     policy_id = get_policy_id(deployment_id, headers)
     yaml_files = find_yaml_files(directory)
     for yaml_file in yaml_files:
@@ -118,7 +126,7 @@ def main(directory):
             print(f"File: {yaml_file}")
             for rule_id in ids:
                 print(f"  ID: {rule_id}")
-                rule_id = f"semgrep_sc_ci.{rule_id}"
+                rule_id = f"{deployment_slug}.{rule_id}"
                 update_policy(deployment_id, policy_id, MODE, rule_id, headers)
 
 if __name__ == "__main__":
