@@ -103,4 +103,4 @@ def main(directory):
                 update_policy(deployment_id, policy_id, MODE, rule_id, headers)
 
 if __name__ == "__main__":
-    main(".")
+    main("./rules")
