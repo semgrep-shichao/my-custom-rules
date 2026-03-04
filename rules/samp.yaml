@@ -3,11 +3,12 @@ rules:
     languages:
       - c
       - cpp
-    message: Avoid using strcpy; it can cause buffer overflows. Consider using strncpy or safer alternatives.
+    message: Avoid using strcpy; it can cause buffer overflows. Consider safer alternatives like strncpy.
     severity: WARNING
     pattern: strcpy($DEST, $SRC)
     metadata:
       category: security
+      confidence: HIGH
       technology:
         - c
         - cpp
