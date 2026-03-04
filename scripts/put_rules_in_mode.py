@@ -25,12 +25,14 @@ MODE = 'MODE_MONITOR'
 BASE_URL = 'https://semgrep.dev/api/v1/deployments'
 
 def get_semgrep_org_slug(headers):
-    url = "https://semgrep.dev/api/organizations"
-    resp = requests.get(url, headers=headers)
-    resp.raise_for_status()
-
-    data = resp.json()
-    return data["orgs"][0]["slug"]  # first org slug
+    r = requests.get(BASE_URL, headers=headers)
+    if r.status_code != 200:
+        sys.exit(f'Get failed: {r.text}')
+    data = r.json()
+    print(data)
+    deployment_slug = data['deployments'][0].get('slug')
+    logging.info((f'Accessing org slug: {deployment_slug}')
+    return deployment_slug
 
 def get_deployment_id(headers):
     """
