@@ -1,7 +1,7 @@
 on:
   workflow_dispatch: {}
 
-name: Semgrep
+name: Publish
 
 jobs:
   semgrep:
