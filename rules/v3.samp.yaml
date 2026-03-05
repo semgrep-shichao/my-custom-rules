@@ -1,7 +1,5 @@
 rules:
   - id: insecure-strcpy-usage
-    tags:
-      - v3.0
     languages:
       - c
       - cpp
@@ -10,8 +8,6 @@ rules:
     pattern: strcpy($DEST, $SRC)
 
     metadata:
-      labels:
-        - v3
       category: security
       subcategory:
         - vuln
