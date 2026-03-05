@@ -8,6 +8,8 @@ rules:
     pattern: strcpy($DEST, $SRC)
 
     metadata:
+      labels:
+        - v3
       category: security
       subcategory:
         - vuln
