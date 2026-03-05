@@ -3,7 +3,7 @@ rules:
     languages:
       - c
       - cpp
-    message: Avoid using strcpy; it can cause buffer overflows. Consider using strncpy or safer alternatives; v2;
+    message: Avoid using strcpy; it can cause buffer overflows. Consider using strncpy or safer alternatives; v3;
     severity: WARNING
     pattern: strcpy($DEST, $SRC)
 
