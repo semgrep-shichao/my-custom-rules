@@ -1,5 +1,5 @@
 rules:
-  - id: insecure-strcpy-usage.v3
+  - id: v4.insecure-strcpy-usage
     languages:
       - c
       - cpp
