@@ -19,3 +19,4 @@ this is a sample repo to demonstrate the policy as code approach to
 <img width="1906" height="618" alt="image" src="https://github.com/user-attachments/assets/c060cc5f-59db-4d79-950e-c888f0ce4e16" />
 
 
+
